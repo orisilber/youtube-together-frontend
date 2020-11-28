@@ -4,6 +4,7 @@ import {
   ListItem,
   ListSubheader,
   makeStyles,
+  Paper,
   Theme,
   Typography,
 } from "@material-ui/core";
@@ -44,6 +45,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.common.white,
     textAlign: "center",
   },
+  videosContainer: {
+    overflowY: "auto",
+    height: "calc(100% - 80px)",
+  },
 }));
 
 const Playlist = () => {
@@ -73,16 +78,18 @@ const Playlist = () => {
         </div>
       )}
 
-      {videos?.length
-        ? videos.map((video) => (
-            <PlaylistItem
-              isActive={currentVideo?.uid === video.uid}
-              data-testid="playlist-item"
-              key={video.uid}
-              video={video}
-            />
-          ))
-        : null}
+      <Paper className={classes.videosContainer} elevation={0}>
+        {videos?.length
+          ? videos.map((video) => (
+              <PlaylistItem
+                isActive={currentVideo?.uid === video.uid}
+                data-testid="playlist-item"
+                key={video.uid}
+                video={video}
+              />
+            ))
+          : null}
+      </Paper>
 
       {isLoadingComplete && !videos?.length && (
         <Typography
